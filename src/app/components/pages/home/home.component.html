@@ -1,0 +1,8 @@
+<div>
+  <div *ngIf="currentUser">
+    Welcome back {{ currentUser.name }}
+  </div>
+  <div *ngIf="!currentUser">
+    <button (click)="goToLogin()">Login</button>
+  </div>
+</div>
