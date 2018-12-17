@@ -1,12 +1,13 @@
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthQuery } from './../../store/auth.query';
 import { SiteRoutes } from '../../constants/site-routes';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class LoggedOutGuard implements CanActivate {
   constructor(
-    private _authService: AuthService,
+    private _authQuery: AuthQuery,
     private _router: Router
   ) {}
 
@@ -18,11 +19,14 @@ export class LoggedOutGuard implements CanActivate {
    * @param state {RouterStateSnapshot}
    * @returns boolean
    */
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this._authService.isLoggedIn()) {
-      this._router.navigate([SiteRoutes.HOME]);
-      return false;
-    }
-    return true;
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return Observable.create((observer) => {
+      this._authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
+        if (isLoggedIn) {
+          this._router.navigate([SiteRoutes.HOME]);
+        }
+        observer.next(!isLoggedIn);
+      });
+    });
   }
 }

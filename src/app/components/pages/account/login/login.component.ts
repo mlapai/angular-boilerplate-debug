@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from './../../../../store/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,8 +14,8 @@ export class LoginComponent {
   public password = '';
 
   public constructor(
-    private authService: AuthService,
-    private router: Router
+    private _authService: AuthService,
+    private _router: Router
   ) { }
 
   /**
@@ -24,11 +24,12 @@ export class LoginComponent {
    * @returns void
    */
   onSubmit(): void {
-    this.authService.login({
+    this._authService.login({
       email: this.email,
       password: this.password
     }).subscribe(() => {
-      this.router.navigate(['/']);
+      console.log('sssss');
+      this._router.navigate(['/']);
     });
   }
 }

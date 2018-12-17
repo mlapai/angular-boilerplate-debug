@@ -1,8 +1,9 @@
 <div>
-  <div *ngIf="currentUser">
-    Welcome back {{ currentUser.name }}
+  <div *ngIf="currentUser$ | async as currentUser">
+    Welcome back {{ currentUser.email }}
+    <button (click)="logout()">Logout</button>
   </div>
-  <div *ngIf="!currentUser">
+  <div *ngIf="!isLoggedIn">
     <button (click)="goToLogin()">Login</button>
   </div>
 </div>

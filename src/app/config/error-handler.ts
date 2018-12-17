@@ -1,7 +1,7 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../store/auth.service';
 import { SiteRoutes } from '../constants/site-routes';
 
 @Injectable()
@@ -36,6 +36,6 @@ export class AppErrorsHandler implements ErrorHandler {
     const router: Router = this.injector.get(Router);
     const authService: AuthService = this.injector.get(AuthService);
     router.navigate([SiteRoutes.LOGIN]);
-    authService.removeAuthUser();
+    authService.logout();
   }
 }

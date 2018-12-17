@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Injectable, Inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { AuthQuery } from '../store/auth.query';
 
 @Injectable()
 export class HttpApiInterceptor implements HttpInterceptor {
@@ -12,7 +12,7 @@ export class HttpApiInterceptor implements HttpInterceptor {
    * @param authService {AuthService}
    */
   constructor(
-    private authService: AuthService
+    private _authQuery: AuthQuery
   ) { }
 
   /**
@@ -25,14 +25,25 @@ export class HttpApiInterceptor implements HttpInterceptor {
    */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = environment.apiUrl;
-    req = req.clone({
-      url: url + req.url,
-      setHeaders: {
-        'Content-Type' : 'application/json; charset=utf-8',
-        'Accept'       : 'application/json',
-        'Authorization': `Bearer ${this.authService.getToken()}`,
-      },
+    let observable: Observable<HttpEvent<any>>;
+    this._authQuery.token$.subscribe((token) => {
+      let authHeaders = token
+        ? {
+          'Authorization': `Bearer ${token}`,
+        }
+        : {};
+
+      req = req.clone({
+        url: url + req.url,
+        setHeaders: {
+          'Content-Type' : 'application/json; charset=utf-8',
+          'Accept'       : 'application/json',
+          ...authHeaders
+        },
+      });
+      observable = next.handle(req);
     });
-    return next.handle(req);
+
+    return observable
   }
 }
