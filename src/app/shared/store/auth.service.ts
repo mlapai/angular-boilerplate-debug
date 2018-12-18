@@ -37,7 +37,7 @@ export class AuthService {
         this.authStore.updateRoot((state) => ({
           token: data.token,
           user: {
-            email: 'jon@doe.com' // temporary
+            email: 'jon@doe.com' // TODO: change this after implementation
           }
         }));
       })
@@ -56,7 +56,7 @@ export class AuthService {
         this.authStore.updateRoot({
           token: data.token,
           user: {
-            email: 'jon@doe.com' // temporary
+            email: 'jon@doe.com' // TODO: change this after implementation
           }
         });
       })

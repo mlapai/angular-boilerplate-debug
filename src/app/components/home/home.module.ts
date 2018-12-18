@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
-import { CoreModulesModule } from '../../shared/core.module';
 import {
   MatSidenavModule,
   MatIconModule,
   MatToolbarModule,
 } from '@angular/material';
+
+import { HomeComponent } from './home.component';
+import { CoreModulesModule } from './../../shared/components/core.module';
 
 @NgModule({
   declarations: [

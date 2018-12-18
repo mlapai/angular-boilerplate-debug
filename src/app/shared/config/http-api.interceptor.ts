@@ -3,8 +3,8 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { environment } from './../../environments/environment';
-import { AuthQuery } from './../common-store';
+import { environment } from './../../../environments/environment';
+import { AuthQuery } from './../store';
 
 @Injectable()
 export class HttpApiInterceptor implements HttpInterceptor {

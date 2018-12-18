@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { SiteRoutes } from './../../../constants/site-routes';
-import { AuthService, AuthQuery, User } from './../../../common-store';
+import { SiteRoutes } from './../../shared/constants';
+import { AuthService, AuthQuery, User } from './../../shared/store';
 
 @Component({
   selector: 'app-home',

@@ -8,10 +8,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './router/app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './components/pages/home/home.module';
-import { AccountModule } from './components/pages/account/account.module';
-import { HttpApiInterceptor } from './config/http-api.interceptor';
-import { AppErrorsHandler } from './config/error-handler';
+import { HomeModule } from './components/home/home.module';
+import { AccountModule } from './components/account/account.module';
+import { HttpApiInterceptor, AppErrorsHandler } from './shared/config';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));

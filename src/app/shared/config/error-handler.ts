@@ -2,8 +2,8 @@ import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { AuthService } from './../common-store';
-import { SiteRoutes } from './../constants/site-routes';
+import { AuthService } from './../store';
+import { SiteRoutes } from './../constants';
 
 @Injectable()
 export class AppErrorsHandler implements ErrorHandler {

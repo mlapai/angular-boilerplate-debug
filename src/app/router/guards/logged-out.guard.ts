@@ -2,8 +2,8 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthQuery } from './../../common-store';
-import { SiteRoutes } from './../../constants/site-routes';
+import { AuthQuery } from './../../shared/store';
+import { SiteRoutes } from './../../shared/constants';
 
 @Injectable()
 export class LoggedOutGuard implements CanActivate {
