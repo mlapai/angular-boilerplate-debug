@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './../../../../store/auth.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from './../../../../common-store';
 
 @Component({
   selector: 'app-register',

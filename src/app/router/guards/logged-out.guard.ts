@@ -1,14 +1,15 @@
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthQuery } from './../../store/auth.query';
-import { SiteRoutes } from '../../constants/site-routes';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { AuthQuery } from './../../common-store';
+import { SiteRoutes } from './../../constants/site-routes';
 
 @Injectable()
 export class LoggedOutGuard implements CanActivate {
   constructor(
-    private _authQuery: AuthQuery,
-    private _router: Router
+    private authQuery: AuthQuery,
+    private router: Router
   ) {}
 
   /**
@@ -21,9 +22,9 @@ export class LoggedOutGuard implements CanActivate {
    */
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return Observable.create((observer) => {
-      this._authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
         if (isLoggedIn) {
-          this._router.navigate([SiteRoutes.HOME]);
+          this.router.navigate([SiteRoutes.HOME]);
         }
         observer.next(!isLoggedIn);
       });

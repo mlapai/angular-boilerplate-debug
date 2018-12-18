@@ -1,9 +1,10 @@
 
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Injectable, Inject } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthQuery } from '../store/auth.query';
+
+import { environment } from './../../environments/environment';
+import { AuthQuery } from './../common-store';
 
 @Injectable()
 export class HttpApiInterceptor implements HttpInterceptor {
@@ -12,7 +13,7 @@ export class HttpApiInterceptor implements HttpInterceptor {
    * @param authService {AuthService}
    */
   constructor(
-    private _authQuery: AuthQuery
+    private authQuery: AuthQuery
   ) { }
 
   /**
@@ -26,7 +27,7 @@ export class HttpApiInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = environment.apiUrl;
     let observable: Observable<HttpEvent<any>>;
-    this._authQuery.token$.subscribe((token) => {
+    this.authQuery.token$.subscribe((token) => {
       let authHeaders = token
         ? {
           'Authorization': `Bearer ${token}`,

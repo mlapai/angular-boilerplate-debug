@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 import { MaterialModule } from './material.module'
+import { CommonStoreModule } from './../../common-store'
 
 @NgModule({
   imports: [
@@ -10,14 +12,16 @@ import { MaterialModule } from './material.module'
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    CommonStoreModule
   ],
   exports: [
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    CommonStoreModule
   ]
 })
 export class CoreModulesModule {}

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthQuery } from '../../../store/auth.query';
-import { User } from '../../../store/user.model';
 import { Router } from '@angular/router';
-import { SiteRoutes } from '../../../constants/site-routes';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/store/auth.service';
+
+import { SiteRoutes } from './../../../constants/site-routes';
+import { AuthService, AuthQuery, User } from './../../../common-store';
 
 @Component({
   selector: 'app-home',
@@ -26,14 +25,14 @@ export class HomeComponent {
   public isLoggedIn: boolean;
 
   constructor(
-    private _authQuery: AuthQuery,
-    private _authService: AuthService,
-    private _router: Router
+    private authQuery: AuthQuery,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.currentUser$ = this._authQuery.user$;
-    this._authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
+    this.currentUser$ = this.authQuery.user$;
+    this.authQuery.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
   }
@@ -43,7 +42,7 @@ export class HomeComponent {
    * @returns void
    */
   goToLogin(): void {
-    this._router.navigate([SiteRoutes.LOGIN]);
+    this.router.navigate([SiteRoutes.LOGIN]);
   }
 
   /**
@@ -51,6 +50,6 @@ export class HomeComponent {
    * @returns void
    */
   logout(): void {
-    this._authService.logout();
+    this.authService.logout();
   }
 }

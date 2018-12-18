@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CLIENT_ID } from '../constants';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
 import { AuthStore } from './auth.store';
 
 const ENDPOINTS = {
@@ -20,8 +20,8 @@ export class AuthService {
    * @param http {HttpClient}
    */
   constructor(
-    private _http: HttpClient,
-    private _authStore: AuthStore
+    private http: HttpClient,
+    private authStore: AuthStore
   ) { }
 
   /**
@@ -32,9 +32,9 @@ export class AuthService {
    * @returns Observable<any>
    */
   login(data: any): Observable<any> {
-    return this._http.post(ENDPOINTS.LOGIN, data).pipe(
+    return this.http.post(ENDPOINTS.LOGIN, data).pipe(
       tap((data: { token: string }) => {
-        this._authStore.updateRoot((state) => ({
+        this.authStore.updateRoot((state) => ({
           token: data.token,
           user: {
             email: 'jon@doe.com' // temporary
@@ -51,13 +51,9 @@ export class AuthService {
    * @returns Observable<any>
    */
   register(data: any): Observable<any> {
-    return this._http.post(ENDPOINTS.REGISTER, data, {
-      headers: {
-        clientId: String(CLIENT_ID)
-      }
-    }).pipe(
+    return this.http.post(ENDPOINTS.REGISTER, data).pipe(
       tap((data: { token: string }) => {
-        this._authStore.updateRoot({
+        this.authStore.updateRoot({
           token: data.token,
           user: {
             email: 'jon@doe.com' // temporary
@@ -71,11 +67,10 @@ export class AuthService {
    * Logout user
    * Clear auth data from the localstorage
    * @method logout
-   * @param data {any}
-   * @returns Observable<any>
+   * @returns void
    */
   logout() {
-    this._authStore.updateRoot({
+    this.authStore.updateRoot({
       token: null,
       user: null
     })

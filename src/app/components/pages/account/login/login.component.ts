@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
-import { AuthService } from './../../../../store/auth.service';
+
+import { AuthService } from './../../../../common-store';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,8 @@ export class LoginComponent {
   ]);
 
   public constructor(
-    private _authService: AuthService,
-    private _router: Router
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   /**
@@ -33,11 +34,11 @@ export class LoginComponent {
       return;
     }
 
-    this._authService.login({
+    this.authService.login({
       email: this.email.value,
       password: this.password.value
     }).subscribe(() => {
-      this._router.navigate(['/']);
+      this.router.navigate(['/']);
     });
   }
 
