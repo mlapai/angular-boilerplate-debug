@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/store/auth.service';
   styleUrls: [ './home.scss' ]
 })
 export class HomeComponent {
-  title = 'Home';
+
   /**
    * Holds current active user
    * @type User

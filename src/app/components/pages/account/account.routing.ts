@@ -9,5 +9,6 @@ export const accountRouting: Routes = [
     component: LoginComponent,
     canActivate: [ LoggedOutGuard ]
   },
-  { path: 'register', component: RegisterComponent },
+  // TODO: it will be implemented after MVP
+  // { path: 'register', component: RegisterComponent },
 ];

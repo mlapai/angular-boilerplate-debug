@@ -3,7 +3,4 @@
     Welcome back {{ currentUser.email }}
     <button (click)="logout()">Logout</button>
   </div>
-  <div *ngIf="!isLoggedIn">
-    <button (click)="goToLogin()">Login</button>
-  </div>
 </div>

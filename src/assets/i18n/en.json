@@ -4,5 +4,10 @@
     "EMAIL": "Email",
     "USERNAME": "Username",
     "PASSWORD": "Password"
+  },
+  "VALIDATION": {
+    "EMAIL_NOT_VALID": "Not a valid email",
+    "EMAIL_REQUIRED": "Email field is required",
+    "PASSWORD_REQUIRED": "Password field is required"
   }
 }

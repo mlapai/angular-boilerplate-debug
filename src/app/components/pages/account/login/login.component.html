@@ -1,9 +1,40 @@
 <div class="login-container">
   <form (ngSubmit)="onSubmit()">
-    <label for="email">{{ 'COMMON.EMAIL' | translate }}</label>
-    <input name="email" required type="email" [(ngModel)]="email"/>
-    <label for="password">{{ 'COMMON.PASSWORD' | translate }}</label>
-    <input name="password" required type="password" [(ngModel)]="password"/>
-    <input type="submit"/>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{ 'COMMON.EMAIL' | translate }}"
+        [formControl]="email"
+        required
+        type="email"
+      >
+      <mat-error
+        *ngIf="email.invalid"
+      >
+      {{ getErrorMessage('email') | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+          matInput
+          placeholder="{{ 'COMMON.PASSWORD' | translate }}"
+          [formControl]="password"
+          required
+          type="password"
+        >
+        <mat-error
+          *ngIf="email.invalid"
+        >
+        {{ getErrorMessage('password') | translate }}
+        </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        [disabled]="!email.valid || !password.valid"
+      >
+      {{ 'COMMON.LOGIN' | translate }}
+      </button>
   </form>
 </div>

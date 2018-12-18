@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './../../../../store/auth.service';
 import { Router } from '@angular/router';
+import {FormControl, Validators} from '@angular/forms';
+import { AuthService } from './../../../../store/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,13 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  title = 'Login';
-  public email = '';
-  public password = '';
+  public email = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
+  public password = new FormControl('', [
+    Validators.required
+  ]);
 
   public constructor(
     private _authService: AuthService,
@@ -24,12 +29,33 @@ export class LoginComponent {
    * @returns void
    */
   onSubmit(): void {
+    if (!this.email.valid || !this.password.valid) {
+      return;
+    }
+
     this._authService.login({
-      email: this.email,
-      password: this.password
+      email: this.email.value,
+      password: this.password.value
     }).subscribe(() => {
-      console.log('sssss');
       this._router.navigate(['/']);
     });
+  }
+
+  /**
+   * Get error message
+   * @method getErrorMessage
+   * @param fieldName
+   * @returns string
+   */
+  getErrorMessage(fieldName) {
+    if (this[fieldName].hasError('required'))  {
+      return `VALIDATION.${fieldName.toUpperCase()}_REQUIRED`;
+    }
+
+    if (this[fieldName].hasError('email'))  {
+      return 'VALIDATION.EMAIL_NOT_VALID';
+    }
+
+    return '';
   }
 }
