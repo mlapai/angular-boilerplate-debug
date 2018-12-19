@@ -6,7 +6,7 @@ import { Environment } from './environment.interface';
 
 export const environment: Environment = {
   production: false,
-  apiUrl: 'http://localhost/api',
+  apiUrl: 'https://reqres.in/api',
   env: 'dev'
 };
 
