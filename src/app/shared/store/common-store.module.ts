@@ -18,9 +18,6 @@ persistState({
 
 
 @NgModule({
-  imports: [
-    AkitaNgDevtools.forRoot(),
-  ],
   exports: [],
   providers: [
     AuthStore,
