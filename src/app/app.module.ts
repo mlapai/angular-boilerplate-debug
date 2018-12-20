@@ -40,8 +40,7 @@ export function HttpLoaderFactory(handler: HttpBackend) {
     { provide: ErrorHandler, useClass: AppErrorsHandler },
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: HTTP_INTERCEPTORS, useClass: HttpApiInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
+  ]
 })
 export class AppModule {
 }
