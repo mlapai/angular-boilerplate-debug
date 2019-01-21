@@ -9,5 +9,9 @@ export const routes: Routes = [
     component: HomeComponent,
     canActivate: [ LoggedInGuard ]
   },
+  {
+    path: 'test',
+    loadChildren: './../components/debug-test/debug-test.module#DebugTestModule'
+  },
   ...accountRouting
 ];

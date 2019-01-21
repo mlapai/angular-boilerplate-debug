@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './components/home/home.module';
 import { AccountModule } from './components/account/account.module';
 import { HttpApiInterceptor, AppErrorsHandler } from './shared/config';
+import { DebugTestComponent } from './components/debug-test/debug-test.component';
 
 export function HttpLoaderFactory(handler: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(handler));
